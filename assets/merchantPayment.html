@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>To The Movies!</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,target-densitydpi=high-dpi" />    
+
+    <link rel="stylesheet" href="./css/pure-min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/app.css">
+</head>
+<body>
+
+<h1>Merchant Payment</h1>
+
+<input type="button" value="Submit for Payment" />
+
+
+
+<script src="./js/jquery-2.0.3.min.js"></script>
+<script src="./js/jquery-ui.min.js"></script>
+
+<script src="./js/mustache-min.js"></script>
+<script src="./js/underscore-min.js"></script>
+<script src="./js/date-min.js"></script>
+<script src="./js/director.min.js"></script>
+<script src="./js/parseuri.js"></script>
+
+<script src="./js/app.js"></script>
+<script>
+$(function() {
+	
+	$("#productId").html(Bridge.getProductId());
+	$("#price").html(Bridge.getPrice());
+	$("#description").html(Bridge.getDescription());
+	
+	
+	
+});
+
+function assignSeat() {
+		Bridge.assignSeat();
+	}
+</script>
+</body>
+
+</html>
