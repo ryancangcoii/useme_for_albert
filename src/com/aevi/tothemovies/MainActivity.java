@@ -77,8 +77,8 @@ public class MainActivity extends Activity implements OnClickListener{
     
     setContentView(R.layout.activity_main);
     
-//    Button helloButton =(Button)findViewById(R.id.helloButton);
-//    helloButton.setOnClickListener(this);
+    Button helloButton =(Button)findViewById(R.id.helloButton);
+    helloButton.setOnClickListener(this);
 
     webView = (WebView) findViewById(R.id.webView);
     webView.getSettings().setJavaScriptEnabled(true);
