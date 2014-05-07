@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Make Payment</title>
+    <title>Assigned Seat!</title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,target-densitydpi=high-dpi" />    
 
@@ -30,17 +30,9 @@ input.ui-input-text {
 	color: white;
 	margin-left: 80px;
 }
-
-label, .data {
-	font-size: 50px;
-}
-
-.data {
-	font-weight: bold;
-}
-
-.header {
-	font-size: 70px;
+.message {
+	font-size: 100px;
+	text-align: center;
 }
 </style>
 
@@ -54,34 +46,15 @@ label, .data {
 		<div class="ui-block-a"><img src="img/hardrock-logo.svg" ></div>
 	</div>
 </div>
-
 <br/><br/><br/><br/>
+<div id="content" style="text-align:center;">
 
-<div id="content" data-role="content" style="padding: 40px;">
-
-	<span class="header"> THIS IS YOUR PRODUCT: </span>
-<br/><br/>
-<label>Product Id:</label> <span id="productId" class="data">--</span>
-<br/>
-<br/>
-<label>Price:</label> <span id="price" class="data">--</span>
-<br/>
-<br/>
-<label>Description:</label> <span id="description" class="data">--</span>
-<br/>
-<br/>
-
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+	<span class="message ui-content ui-">You are now going to the <b>secure payment area</b><span>
+	<br/><br/>
+	<img src="img/loading.gif" width="150"/>
 </div>
 	
-<div class="ui-grid-solo" align="center">
-	<div class="ui-block-a"><a href="#" onclick="buyProduct()"><img src="img/btn-paynow.png" /></a></div>
-</div>
+
 
 </div>
 <br />
@@ -92,12 +65,6 @@ label, .data {
 		<div class="ui-block-c img"><img src="img/tt-logo.png" class="img-ttlogo"></div>
 	</div>
 </div>
-
-
-
-
-
-
 
 </div>
 <script src="js/jquery-2.0.3.min.js"></script>
@@ -110,20 +77,17 @@ label, .data {
 <script src="js/director.min.js"></script>
 <script src="js/parseuri.js"></script>
 
-<script>
-$(function() {
-	
-	$("#productId").html(Bridge.getProductId());
-	$("#price").html(Bridge.getPrice());
-	$("#description").html(Bridge.getDescription());
-	
-	
-	
-});
 
-function buyProduct() {
-		Bridge.initialProductScreen();
-	}
+<script>
+
+	
+	
+	$(function() {
+		setTimeout(function() {
+			Bridge.buyProduct();
+		}, 2000);
+	});
+	
 </script>
 </body>
 

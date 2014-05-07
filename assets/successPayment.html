@@ -2,47 +2,104 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>To The Movies!</title>
+    <title>Make Payment</title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,target-densitydpi=high-dpi" />    
 
     <link rel="stylesheet" href="./css/pure-min.css">
     <link rel="stylesheet" href="./css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./jquery/css/themes/default/jquery.mobile-1.2.0.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/main.css">
+
+<style>
+input.ui-input-text {
+	width: 90%;
+	margin: auto;
+	font-size: 50px;
+}
+
+.input-label {
+	font-size: 36px;
+	line-height: 1.4;
+	display: block;
+	font-weight: normal;
+	margin: 0 0 .3em;
+	font-family: Helvetica;
+	color: white;
+	margin-left: 80px;
+}
+
+label, .data {
+	font-size: 50px;
+}
+
+.data {
+	font-weight: bold;
+}
+
+.header {
+	font-size: 70px;
+}
+</style>
+
 </head>
 <body>
 
-<h1>Payment Response</h1>
-<br /><br /><br />
-<h2>Payment Successful</h2>
-<br /><br/>
+<div class="page">
+
+<div class="header">
+	<div class="ui-grid-solo">
+		<div class="ui-block-a"><img src="img/hardrock-logo.svg" ></div>
+	</div>
+</div>
+
+<br/><br/><br/><br/>
+
+<div id="content" data-role="content" style="padding: 40px;" align="center">
+
+	<span class="header"> <b>Thank You,</b> your payment has been successful.</span>
+
+</div>
+
+</div>
+<br />
+<div data-role="footer" class="ui-footer" data-position="fixed">
+	<div class="ui-grid-b">
+		<div class="ui-block-a img"><img src="img/pi-logo.png" class="img-pilogo"></div>
+		<div class="ui-block-b img" align="center"><img src="img/btn-home.png" class="img-home" onclick="navigateHome()"></div>
+		<div class="ui-block-c img"><img src="img/tt-logo.png" class="img-ttlogo"></div>
+	</div>
+</div>
 
 
 
-<script src="./js/jquery-2.0.3.min.js"></script>
-<script src="./js/jquery-ui.min.js"></script>
 
-<script src="./js/mustache-min.js"></script>
-<script src="./js/underscore-min.js"></script>
-<script src="./js/date-min.js"></script>
-<script src="./js/director.min.js"></script>
-<script src="./js/parseuri.js"></script>
 
-<script src="./js/app.js"></script>
+
+
+</div>
+<script src="js/jquery-2.0.3.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+
+<script src="js/main.js"></script>
+<script src="js/mustache-min.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="js/date-min.js"></script>
+<script src="js/director.min.js"></script>
+<script src="js/parseuri.js"></script>
+
 <script>
 $(function() {
 	
-	$("#productId").html(Bridge.getProductId());
-	$("#price").html(Bridge.getPrice());
-	$("#description").html(Bridge.getDescription());
-	
-	
+	setTimeout(function() {
+		Bridge.gotoHome();
+	}, 5000);
 	
 });
 
-function assignSeat() {
-		Bridge.assignSeat();
-	}
+
 </script>
 </body>
 

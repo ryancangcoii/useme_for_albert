@@ -57,30 +57,10 @@ label, .data {
 
 <br/><br/><br/><br/>
 
-<div id="content" data-role="content" style="padding: 40px;">
+<div id="content" data-role="content" style="padding: 40px;" align="center">
 
-	<span class="header"> THIS IS YOUR PRODUCT: </span>
-<br/><br/>
-<label>Product Id:</label> <span id="productId" class="data">--</span>
-<br/>
-<br/>
-<label>Price:</label> <span id="price" class="data">--</span>
-<br/>
-<br/>
-<label>Description:</label> <span id="description" class="data">--</span>
-<br/>
-<br/>
+	<span class="header"> <b>Thank You,</b> Table# <span id="tableNumber">0</span> has been successful.</span>
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-</div>
-	
-<div class="ui-grid-solo" align="center">
-	<div class="ui-block-a"><a href="#" onclick="buyProduct()"><img src="img/btn-paynow.png" /></a></div>
 </div>
 
 </div>
@@ -113,17 +93,11 @@ label, .data {
 <script>
 $(function() {
 	
-	$("#productId").html(Bridge.getProductId());
-	$("#price").html(Bridge.getPrice());
-	$("#description").html(Bridge.getDescription());
-	
-	
+	$("#tableNumber").html(Bridge.getSeatNumber());
 	
 });
 
-function buyProduct() {
-		Bridge.initialProductScreen();
-	}
+
 </script>
 </body>
 

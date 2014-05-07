@@ -56,6 +56,7 @@ public class MainActivity extends Activity implements OnClickListener{
   private String productId;
   private String price;
   private String description;
+public String seatNumber;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +78,8 @@ public class MainActivity extends Activity implements OnClickListener{
     
     setContentView(R.layout.activity_main);
     
-    Button helloButton =(Button)findViewById(R.id.helloButton);
-    helloButton.setOnClickListener(this);
+//    Button helloButton =(Button)findViewById(R.id.helloButton);
+//    helloButton.setOnClickListener(this);
 
     webView = (WebView) findViewById(R.id.webView);
     webView.getSettings().setJavaScriptEnabled(true);
@@ -87,7 +88,7 @@ public class MainActivity extends Activity implements OnClickListener{
     webView.addJavascriptInterface(javascriptBridge, "Bridge");
     
     webView.setWebChromeClient(new WebChromeClient());
-    webView.loadDataWithBaseURL("file:///android_asset/", getFileFromApplicationResources("useme_index.html"), "text/html", "utf-8", "");
+    gotoHome();
   }
 
   private void assertInstalledComponents() {
@@ -179,6 +180,12 @@ public class MainActivity extends Activity implements OnClickListener{
     	IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
     	if (result != null) {
     		String contents = result.getContents();
+    		
+    		if (contents == null) {
+    			gotoHome();
+    			return;
+    		}
+    		
     		Log.d(TAG, "Result is " + contents);
     		
     		if (contents.startsWith("albert:::")) {
@@ -220,6 +227,17 @@ public class MainActivity extends Activity implements OnClickListener{
     	
     } else {
     	// Must be an Albert response
+//    	TransactionResult transactionResult = TransactionResult.fromIntent(data);
+//
+//	 	switch (transactionResult.getTransactionStatus()) {
+//	 		case APPROVED:
+//	 			javascriptBridge.navigate("/success/" + requestCode);
+//	 			break;
+//	 			default:
+//	 			javascriptBridge.navigate("/failure");
+//	 			break;
+//	 	}
+	 	
     	 TransactionResult transactionResult = TransactionResult.fromIntent(data);
     	 TransactionStatus transactionStatus = transactionResult.getTransactionStatus();
     	 	switch (transactionStatus) {
@@ -229,7 +247,7 @@ public class MainActivity extends Activity implements OnClickListener{
     	 					getFileFromApplicationResources("successPayment.html"), 
     	 					"text/html", "utf-8", "");
     	 			
-//    	 			javascriptBridge.navigate("/successPayment.html");
+    	 			javascriptBridge.navigate("/successPayment.html");
     	 			
     	 			break;
     	 			default:
@@ -252,11 +270,25 @@ public class MainActivity extends Activity implements OnClickListener{
     public JavascriptBridge(MainActivity mainActivity) {
     	this.mainActivity = mainActivity;
 	}
-
+    
+    public void gotoHome() {
+    	mainActivity.gotoHome();
+    }
+    
 	public void scan() {
 		Log.d(tag, "Time to scan");
 		IntentIntegrator scanIntegrator = new IntentIntegrator(mainActivity);
     	scanIntegrator.initiateScan();
+    	
+    }
+	
+	public void navigateAssignSeatSuccessful(String seatNumber) {
+		
+		mainActivity.seatNumber = seatNumber;
+		
+		webView.loadDataWithBaseURL("file:///android_asset/", 
+				getFileFromApplicationResources("successAssignTable.html"), 
+				"text/html", "utf-8", "");
     	
     }
 	
@@ -298,6 +330,12 @@ public class MainActivity extends Activity implements OnClickListener{
     	
     }
 	
+	public void initialProductScreen() {
+    	webView.loadDataWithBaseURL("file:///android_asset/", 
+				getFileFromApplicationResources("paymentInitialScreen.html"), 
+				"text/html", "utf-8", "");
+    }
+	
 	public void makePayment(String amount) {
 		mainActivity.price = amount;
 		mainActivity.productId = "00001";
@@ -318,6 +356,10 @@ public class MainActivity extends Activity implements OnClickListener{
 		return mainActivity.description;
 	}
     
+	public String getSeatNumber() {
+		return mainActivity.seatNumber;
+	}
+	
     public void buyTicket(String movieId, String amount) {
       BigDecimal parsedAmount = new BigDecimal(amount);
 
@@ -326,7 +368,7 @@ public class MainActivity extends Activity implements OnClickListener{
       PaymentRequest paymentRequest = new PaymentRequest(parsedAmount);
       startActivityForResult(paymentRequest.createIntent(), Integer.parseInt(movieId));
     }
-
+    
     public void navigate(final String fragment) {
       Log.d(tag, "Navigating to " + fragment);
 
@@ -411,13 +453,20 @@ public class MainActivity extends Activity implements OnClickListener{
     }
   }
 
-@Override
-public void onClick(View v) {
+	@Override
+	public void onClick(View v) {
+		
+		gotoHome();
+		
+	}
+
+	public void gotoHome() {
+		
+		webView.loadDataWithBaseURL("file:///android_asset/", 
+				getFileFromApplicationResources("useme_index.html"), 
+				"text/html", "utf-8", "");
+		
+	}
 	
-	webView.loadDataWithBaseURL("file:///android_asset/", 
-			getFileFromApplicationResources("useme_index.html"), 
-			"text/html", "utf-8", "");
-//	webView.loadUrl("/useme_index.html");
 	
-}
 }
